@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Form from "../components/Form/Form";
+import { PostFormData } from "../API_Handling/ApiHandling";
+import MainForm from "../components/Form/Form";
 import Table from "../components/Table/Table";
 import Instruction from "../BookingDetails/Instruction/Instruction";
 import TravelForm from "../BookingDetails/TravelForm/TravelForm";
@@ -9,6 +10,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import{Formik } from 'formik';
 import * as yup from 'yup';
+import { useNavigate } from "react-router-dom";
 
 
 const validationSchema = yup.object().shape({
@@ -16,28 +18,75 @@ const validationSchema = yup.object().shape({
       fromAirport: yup.string("Enter Departure Airport").required("required"),
       departureDate: yup.date().required("required"),
       returnDate: yup.date().required("required"),
-
+      bookingId:yup.number().required(),
 })
 
+const initialValues = {
+  bookingId:null,
+  title:"",
+  radio:"",
+  fromAirport:"",
+  toAirport:"",
+  departureDate:null,
+  returnDate:null,
+  personCount:0,
+  flightClass:"",
+  hotel:false,
+  car:false,
+  hotelDays:0,
+  carType:"",
+  carDays:0,
+  status:"",
+}
 
+
+const navigate = useNavigate();
 
 
 export const HomePage = () => {
   return (
     <div>
-      <Form />
+      <MainForm />
       <Table />
     </div>
   );
 };
 
 export const BookingHomePage = ({ row }) => {
+
+  const API_KEY = process.env.REACT_APP_BASEURL;
+  
+  const handleSubmit = async(values) => {
+    await PostFormData(values);
+    navigate('/');
+  }
+
   return (
     <div>
       <Instruction />
-      {row ? <TravelForm dpt={row.dpt} returnDate={row.return}/> : <TravelForm/>}
-      <ExpenseForm />
-      <FormButtons />
+    <Formik
+    initialValues={initialValues}
+    onSubmit={handleSubmit}
+    validationSchema={validationSchema}
+    >
+    {(
+      values,
+      errors,
+      touched,
+      handleChange,
+      handleBlur,
+      handleSubmit,
+    ) => (
+<form>
+<TravelForm />
+<ExpenseForm />
+<FormButtons />
+
+</form>
+)}
+
+{/* {row ? <TravelForm dpt={row.dpt} returnDate={row.return}/> : <TravelForm/>} */}
+    </Formik>
     </div>
   );
 };

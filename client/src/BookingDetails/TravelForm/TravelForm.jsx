@@ -15,7 +15,7 @@ const TravelForm = ({dpt, returnDate, }) => {
       <SharedBox padding='0' flexDirection='column' alignItems='start' gap='0.5rem'>
       <SharedBox padding='0' alignItems='start' flexDirection='row'>
       <InputLabel sx={{fontSize:'25px'}}>Title</InputLabel>
-      <Tooltip title="Title must be within 100 Letters">
+      <Tooltip title="Title must be within 100 Letters" placement='right'>
       <IconButton>
       <InfoIcon/>
       </IconButton>
