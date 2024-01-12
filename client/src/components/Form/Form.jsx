@@ -7,7 +7,7 @@ import {v4 as uuidv4} from 'uuid'
 
 // IMPORTING ICONS HERE 
 import SearchIcon from '@mui/icons-material/Search';
-// import AddIcon from '@mui/icons-material/Add';
+import AddIcon from '@mui/icons-material/Add';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import InfoIcon from '@mui/icons-material/Info';
 
@@ -16,7 +16,7 @@ import InfoIcon from '@mui/icons-material/Info';
 
 
 
-const Form = () => {
+const MainForm = () => {
   const [openFilter, setOpenFilter] = useState(false);
   const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ const Form = () => {
 
                 <SharedBtn variant='contained' onClick={handleClick}>
                     New Booking
-                    {/*<AddIcon sx={{paddingLeft:'10px'}}/>*/}
+                    <AddIcon sx={{paddingLeft:'10px'}}/>
                 </SharedBtn>
             </SharedBox>
     </Box>
@@ -59,4 +59,4 @@ const Form = () => {
   )
 }
 
-export default Form
+export default MainForm
