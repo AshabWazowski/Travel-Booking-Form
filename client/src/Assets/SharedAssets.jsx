@@ -1,7 +1,16 @@
-import { Box, Button, Typography, Paper, TextField, Select, FormControl, InputLabel } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  Paper,
+  TextField,
+  Select,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
 import React from "react";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 export const SharedBox = ({
   children,
@@ -14,7 +23,7 @@ export const SharedBox = ({
   height,
   flexDirection,
   gap,
-  handleClick
+  handleClick,
 }) => {
   return (
     <Box
@@ -63,8 +72,8 @@ export const SharedTypo = ({
       color={color}
       fontWeight={fontWeight}
       fontFamily={fontFamily || "Montserrat"}
-      gutterBottom= {gutterBottom}
-      sx={{ padding: { padding } , cursor:cursor}}
+      gutterBottom={gutterBottom}
+      sx={{ padding: { padding }, cursor: cursor }}
     >
       {children}
     </Typography>
@@ -92,7 +101,7 @@ export const SharedPaper = ({
         overflow: { overflow },
         backgroundColor: bgcolors,
         padding: padding,
-        margin:margin
+        margin: margin,
       }}
     >
       {children}
@@ -100,46 +109,54 @@ export const SharedPaper = ({
   );
 };
 
-export const SharedTextField = ({type, label, placeholder , value, onChange, fullWidth}) =>{
- return(
-  <TextField
-  type={type}
-  label={label}
-  placeholder={placeholder || ''}
-  value={value || ''}
-  onChange={onChange}
-  fullWidth={fullWidth}
-  />
- )
-}
-
-export const SharedSelect = ({value, children,width, handleSelect, variant, fullWidth, label})=>{
-  return(
-    <FormControl fullWidth={fullWidth}>
-      <InputLabel>
-      {label}
-      </InputLabel>
-    <Select
-    variant={variant}
-    onChange={handleSelect}
-    value={value}
-    sx={{width:width}}
-    >
-      {children}
-    </Select>
-
-    </FormControl>
-  )
-}
-
-export const SharedDatePicker = ({value, handleChange, label}) =>{
-  return(
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker
-      value={value}
-      onChange={handleChange}
+export const SharedTextField = ({
+  type,
+  label,
+  placeholder,
+  value,
+  onChange,
+  fullWidth,
+}) => {
+  return (
+    <TextField
+      type={type}
       label={label}
-      />
+      placeholder={placeholder || ""}
+      value={value || ""}
+      onChange={onChange}
+      fullWidth={fullWidth}
+    />
+  );
+};
+
+export const SharedSelect = ({
+  value,
+  children,
+  width,
+  handleSelect,
+  variant,
+  fullWidth,
+  label,
+}) => {
+  return (
+    <FormControl fullWidth={fullWidth}>
+      <InputLabel>{label}</InputLabel>
+      <Select
+        variant={variant}
+        onChange={handleSelect}
+        value={value}
+        sx={{ width: width }}
+      >
+        {children}
+      </Select>
+    </FormControl>
+  );
+};
+
+export const SharedDatePicker = ({ value, handleChange, label }) => {
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DatePicker value={value} onChange={handleChange} label={label} />
     </LocalizationProvider>
-  )
-}
+  );
+};

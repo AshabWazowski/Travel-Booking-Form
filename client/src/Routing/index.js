@@ -11,7 +11,7 @@ import{Formik } from 'formik';
 import * as yup from 'yup';
 
 
-const validationSchema = yup.object.shape({
+const validationSchema = yup.object().shape({
       title:yup.string().required("required"),
       fromAirport: yup.string("Enter Departure Airport").required("required"),
       departureDate: yup.date().required("required"),

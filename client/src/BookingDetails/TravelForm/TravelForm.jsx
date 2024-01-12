@@ -1,14 +1,26 @@
-import { Divider, InputLabel } from '@mui/material'
+import { Divider, IconButton, InputLabel, Tooltip } from '@mui/material'
 import React from 'react'
 import { SharedBox, SharedTextField } from '../../Assets/SharedAssets'
 import FlightDetails from './FlightDetails'
 import RadioCheck from './RadioCheck'
+import InfoIcon from '@mui/icons-material/Info';
+
+
 
 const TravelForm = ({dpt, returnDate, }) => {
+  
+  
   return (
     <SharedBox display='block'>
-      <SharedBox flexDirection='column' alignItems='start' gap='1rem'>
-        <InputLabel sx={{fontSize:'25px'}}>Title</InputLabel>
+      <SharedBox padding='0' flexDirection='column' alignItems='start' gap='0.5rem'>
+      <SharedBox padding='0' alignItems='start' flexDirection='row'>
+      <InputLabel sx={{fontSize:'25px'}}>Title</InputLabel>
+      <Tooltip title="Title must be within 100 Letters">
+      <IconButton>
+      <InfoIcon/>
+      </IconButton>
+      </Tooltip>
+      </SharedBox>
         <SharedTextField fullWidth label="Title" />
       </SharedBox>
         <RadioCheck/>
