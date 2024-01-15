@@ -11,6 +11,10 @@ import {
 import React from "react";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
+
+
+
 
 export const SharedBox = ({
   children,
@@ -43,13 +47,14 @@ export const SharedBox = ({
   );
 };
 
-export const SharedBtn = ({ children, variant, disabled, onClick, color }) => {
+export const SharedBtn = ({ type, children, variant, disabled, onClick, color }) => {
   return (
     <Button
       variant={variant || "outlined"}
       disabled={disabled}
       color={color || "primary"}
       onClick={onClick}
+      type={type}
     >
       {children}
     </Button>
@@ -116,6 +121,11 @@ export const SharedTextField = ({
   value,
   onChange,
   fullWidth,
+  name,
+  errors,
+  helperText,
+  handleChange,
+  handleBlur,
 }) => {
   return (
     <TextField
@@ -123,8 +133,12 @@ export const SharedTextField = ({
       label={label}
       placeholder={placeholder || ""}
       value={value || ""}
-      onChange={onChange}
+      onChange={handleChange}
       fullWidth={fullWidth}
+      error={errors}
+      helperText={helperText}
+      name={name}
+      onBlur={handleBlur}
     />
   );
 };
@@ -153,10 +167,30 @@ export const SharedSelect = ({
   );
 };
 
-export const SharedDatePicker = ({ value, handleChange, label }) => {
+export const SharedDatePicker = ({
+  value,
+  handleChange,
+  label,
+  handleBlur,
+  helperText,
+  error,
+  name,
+  disabled,
+  disablePast,
+}) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker value={value} onChange={handleChange} label={label} />
+      <DatePicker
+      disablePast={disablePast}
+      disabled={disabled}
+        name={name}
+        onBlur={handleBlur}
+        value={value}
+        onChange={handleChange}
+        label={label}
+        error={error}
+        helperText={helperText}
+      />
     </LocalizationProvider>
   );
 };

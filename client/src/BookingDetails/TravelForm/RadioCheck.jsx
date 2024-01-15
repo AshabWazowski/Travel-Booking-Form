@@ -8,18 +8,13 @@ import {
 import React, { useState } from "react";
 import { SharedBox } from "../../Assets/SharedAssets";
 
-const RadioCheck = () => {
-  const [value, setValue] = useState("One-Way");
+const RadioCheck = ({values, handleChange}) => {
 
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  };
-  console.log('Radio', value)
   return (
     <SharedBox justifyContent="flex-start">
       <FormControl>
         <FormLabel>Trip Category</FormLabel>
-        <RadioGroup row value={value} onChange={handleChange}>
+        <RadioGroup name="radioCheck" row value={values.radioCheck} onChange={handleChange}>
           <FormControlLabel
             value="Oneway"
             control={<Radio />}

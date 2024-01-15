@@ -7,20 +7,16 @@ import ExpenseForm from "../BookingDetails/ExpensesForm/ExpenseForm";
 import FormButtons from "../BookingDetails/FormButtons/FormButtons";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import{Formik } from 'formik';
-import * as yup from 'yup';
-
+import { Formik } from "formik";
+import * as yup from "yup";
 
 const validationSchema = yup.object().shape({
-      title:yup.string().required("required"),
-      fromAirport: yup.string("Enter Departure Airport").required("required"),
-      departureDate: yup.date().required("required"),
-      returnDate: yup.date().required("required"),
-
-})
-
-
-
+  title: yup.string().required("required"),
+  fromAirport: yup.string("Enter Departure Airport").required("required"),
+  // departureDate: yup.date().required("required"),
+  // returnDate: yup.date().required("required"),
+  people: yup.number().required("required"),
+});
 
 export const HomePage = () => {
   return (
@@ -31,13 +27,59 @@ export const HomePage = () => {
   );
 };
 
-export const BookingHomePage = ({ row }) => {
+const initialValues = {
+  bookId: "",
+  title: "",
+  fromAirport: "",
+  toAirport: "",
+  dptDate: null,
+  returnDate: null,
+  peopleCount:null,
+  flightClass: "",
+  hotel: false,
+  hotelDays: 0,
+  car: false,
+  carType: "",
+  carDays: 0,
+  radioCheck: "Oneway",
+};
+
+export const BookingHomePage = () => {
+  
+  
+  const handleFormSubmit = (values) => {
+    console.log("Form Submission: ", values);
+  };
   return (
     <div>
       <Instruction />
-      {row ? <TravelForm dpt={row.dpt} returnDate={row.return}/> : <TravelForm/>}
-      <ExpenseForm />
-      <FormButtons />
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleFormSubmit}
+      >
+        {({
+          values,
+          touched,
+          errors,
+          handleSubmit,
+          handleBlur,
+          handleChange,
+        }) => (
+          <form onSubmit={handleSubmit}>
+            <TravelForm
+              values={values}
+              touched={touched}
+              errors={errors}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+            <ExpenseForm />
+            
+            <FormButtons />
+          </form>
+        )}
+      </Formik>
     </div>
   );
 };
@@ -60,7 +102,7 @@ export const EditBookingPage = () => {
       console.log("Ashab Error is: ", error.message);
     }
   };
-  console.log('Row Data' ,row)
+  console.log("Row Data", row);
 
-  return <BookingHomePage row={row[0]}/>;
+  return <BookingHomePage row={row[0]} />;
 };

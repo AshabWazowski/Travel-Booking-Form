@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   SharedBox,
   SharedDatePicker,
@@ -6,9 +6,17 @@ import {
   SharedTextField,
 } from "../../Assets/SharedAssets";
 
-const FlightDetails = ({ dpt, returnDate }) => {
+const FlightDetails = ({
+  values,
+  errors,
+  touched,
+  handleBlur,
+  handleChange,
+}) => {
+
+
   return (
-    <>
+    <Fragment>
       <SharedPaper elevation={3} width="100%" overflow="hidden">
         <SharedBox display="block" width="100%" flexDirection="column">
           <SharedBox justifyContent="space-between">
@@ -18,6 +26,14 @@ const FlightDetails = ({ dpt, returnDate }) => {
                 type="text"
                 variant="outlined"
                 label="From Airport"
+                name="fromAirport"
+                value={values.fromAirport}
+                handleBlur={handleBlur}
+                handleChange={handleChange}
+                errors={
+                  Boolean(touched.fromAirport) && Boolean(errors.fromAirport)
+                }
+                helperText={touched.fromAirport && errors.fromAirport}
               />
             </SharedBox>
 
@@ -27,6 +43,9 @@ const FlightDetails = ({ dpt, returnDate }) => {
                 type="text"
                 variant="outlined"
                 label="To Airport"
+                name="toAirport"
+                value={values.toAirport}
+                handleChange={handleChange}
               />
             </SharedBox>
           </SharedBox>
@@ -34,13 +53,31 @@ const FlightDetails = ({ dpt, returnDate }) => {
           <SharedBox justifyContent="space-between">
             <SharedBox flexDirection="column" alignItems="start" gap="0.8rem">
               <label>Departure Date</label>
-              <SharedDatePicker label="Departure Date" />
+              <SharedDatePicker
+                disablePast
+                name="dptDate"
+                value={values.dptDate}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                label="Departure Date"
+                errors={Boolean(touched.dptDate) && Boolean(errors.dptDate)}
+                helperText={touched.dptDate && errors.dptDate}
+              />
             </SharedBox>
 
             <SharedBox flexDirection="column" alignItems="start" gap="0.8rem">
               <label>Return Date</label>
-          
-              <SharedDatePicker label="Return Date" />
+              <SharedDatePicker 
+              disablePast
+              disabled={values.radioCheck === "Oneway" ? true : false}
+              label="Return Date"               
+              name="dptDate"
+              value={values.dptDate}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              errors={Boolean(touched.dptDate) && Boolean(errors.dptDate)}
+              helperText={touched.dptDate && errors.dptDate} 
+              />
             </SharedBox>
           </SharedBox>
 
@@ -50,7 +87,13 @@ const FlightDetails = ({ dpt, returnDate }) => {
               <SharedTextField
                 type="number"
                 variant="outlined"
-                label="From Airport"
+                label="Number of People"
+                name="peopleCount"
+                value={values.peopleCount}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                errors={Boolean(touched.peopleCount) && Boolean(errors.peopleCount)}
+                helperText={touched.peopleCount && errors.peopleCount} 
               />
             </SharedBox>
 
@@ -61,7 +104,7 @@ const FlightDetails = ({ dpt, returnDate }) => {
           </SharedBox>
         </SharedBox>
       </SharedPaper>
-    </>
+    </Fragment>
   );
 };
 
