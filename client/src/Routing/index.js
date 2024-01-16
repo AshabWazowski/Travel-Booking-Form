@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { PostFormData } from "../API_Handling/ApiHandling";
+import {SaveBookingData } from "../API_Handling/ApiHandling";
 import MainForm from "../components/Form/Form";
 import Table from "../components/Table/Table";
 import Instruction from "../BookingDetails/Instruction/Instruction";
@@ -11,13 +11,14 @@ import axios from "axios";
 
 import { Formik } from "formik";
 import * as yup from "yup";
+import { Button } from "@mui/material";
 
 const validationSchema = yup.object().shape({
   title: yup.string().required("required"),
   fromAirport: yup.string("Enter Departure Airport").required("required"),
   // departureDate: yup.date().required("required"),
   // returnDate: yup.date().required("required"),
-  people: yup.number().required("required"),
+  peopleCount: yup.number().required("required"),
 });
 
 
@@ -33,28 +34,28 @@ export const HomePage = () => {
 };
 
 
-const initialValues = {
-  bookId: "",
-  title: "",
-  fromAirport: "",
-  toAirport: "",
-  dptDate: null,
-  returnDate: null,
-  peopleCount:null,
-  flightClass: "",
-  hotel: false,
-  hotelDays: 0,
-  car: false,
-  carType: "",
-  carDays: 0,
-  radioCheck: "Oneway",
-};
 
 export const BookingHomePage = () => {
+  const [submitCheck, setSubmitCheck] = useState('');
   
-  
+  const initialValues = {
+    bookId: "",
+    title: "",
+    fromAirport: "",
+    toAirport: "",
+    dptDate: null,
+    returnDate: null,
+    peopleCount:null,
+    flightClass: "",
+    hotel: false,
+    hotelDays: 0,
+    car: false,
+    carType: "",
+    carDays: 0,
+    radioCheck: "Oneway",
+  };
   const handleFormSubmit = (values) => {
-    console.log("Form Submission: ", values);
+          SaveBookingData(values);
   };
 
   return (
@@ -62,7 +63,7 @@ export const BookingHomePage = () => {
       <Instruction />
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
+        validationSchema={submitCheck === "submit" ? validationSchema : ''}
         onSubmit={handleFormSubmit}
       >
         {({
@@ -83,8 +84,7 @@ export const BookingHomePage = () => {
             />
             
             <ExpenseForm />
-            
-            <FormButtons values={values} />
+            <FormButtons submitCheck={submitCheck} setSubmitCheck={setSubmitCheck}/>
           </form>
         )}
       </Formik>
