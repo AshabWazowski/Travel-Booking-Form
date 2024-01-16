@@ -6,12 +6,18 @@ const API_KEY = process.env.REACT_APP_BASEURL;
 
 
 // SENDING THE FORM DATA TO BACKEND
-export const PostFormData = async (values) => {
+export const SaveBookingData = async (values) => {
+
+  console.log(values);
     
-    try{
-        return await axios.post(`${API_KEY}/data/:id/submit`, values)
-      }catch(err){
-        console.log(err.message);
-      }
+    // try{
+    //     return await axios.post(`${API_KEY}/data/:id/submit`, values)
+    //   }catch(err){
+    //     console.log(err.message);
+    //   }
 
 }
+
+export const SubmitBookingData = (values) =>{
+  
+} 

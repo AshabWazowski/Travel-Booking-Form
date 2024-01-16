@@ -115,6 +115,7 @@ export const SharedPaper = ({
 };
 
 export const SharedTextField = ({
+  variant,
   type,
   label,
   placeholder,
@@ -129,6 +130,7 @@ export const SharedTextField = ({
 }) => {
   return (
     <TextField
+    variant={variant}
       type={type}
       label={label}
       placeholder={placeholder || ""}
