@@ -6,6 +6,8 @@ import RadioCheck from "./RadioCheck";
 import InfoIcon from "@mui/icons-material/Info";
 
 const TravelForm = ({ values, errors, touched, handleBlur, handleChange }) => {
+ 
+ 
   return (
 
     <SharedBox display="block">
@@ -34,18 +36,6 @@ const TravelForm = ({ values, errors, touched, handleBlur, handleChange }) => {
           label="Title"
         />
 
-    <SharedBox display='block'>
-      <SharedBox padding='0' flexDirection='column' alignItems='start' gap='0.5rem'>
-      <SharedBox padding='0' alignItems='start' flexDirection='row'>
-      <InputLabel sx={{fontSize:'25px'}}>Title</InputLabel>
-      <Tooltip title="Title must be within 100 Letters" placement='right'>
-      <IconButton>
-      <InfoIcon/>
-      </IconButton>
-      </Tooltip>
-      </SharedBox>
-        <SharedTextField fullWidth label="Title" />
-
       </SharedBox>
       <RadioCheck values={values} handleChange={handleChange} />
       <Divider />
@@ -58,6 +48,7 @@ const TravelForm = ({ values, errors, touched, handleBlur, handleChange }) => {
       />
     </SharedBox>
   );
-};
+
+}
 
 export default TravelForm;
