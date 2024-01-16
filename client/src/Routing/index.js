@@ -22,36 +22,6 @@ const validationSchema = yup.object().shape({
 
 
 
-const validationSchema = yup.object().shape({
-      title:yup.string().required("required"),
-      fromAirport: yup.string("Enter Departure Airport").required("required"),
-      departureDate: yup.date().required("required"),
-      returnDate: yup.date().required("required"),
-      bookingId:yup.number().required(),
-})
-
-const initialValues = {
-  bookingId:null,
-  title:"",
-  radio:"",
-  fromAirport:"",
-  toAirport:"",
-  departureDate:null,
-  returnDate:null,
-  personCount:0,
-  flightClass:"",
-  hotel:false,
-  car:false,
-  hotelDays:0,
-  carType:"",
-  carDays:0,
-  status:"",
-}
-
-
-
-
-
 
 export const HomePage = () => {
   return (
@@ -86,6 +56,7 @@ export const BookingHomePage = () => {
   const handleFormSubmit = (values) => {
     console.log("Form Submission: ", values);
   };
+
   return (
     <div>
       <Instruction />
@@ -110,54 +81,19 @@ export const BookingHomePage = () => {
               handleBlur={handleBlur}
               handleChange={handleChange}
             />
+            
             <ExpenseForm />
             
-            <FormButtons />
+            <FormButtons values={values} />
           </form>
         )}
       </Formik>
-
-export const BookingHomePage = ({ row }) => {
-
-  const API_KEY = process.env.REACT_APP_BASEURL;
-  
-  const handleSubmit = async(values) => {
-    await PostFormData(values);
-    navigate('/');
-  }
-
-  return (
-    <div>
-      <Instruction />
-    <Formik
-    initialValues={initialValues}
-    onSubmit={handleSubmit}
-    validationSchema={validationSchema}
-    >
-    {(
-      values,
-      errors,
-      touched,
-      handleChange,
-      handleBlur,
-      handleSubmit,
-    ) => (
-<form>
-<TravelForm />
-<ExpenseForm />
-<FormButtons />
-
-</form>
-)}
-
-{/* {row ? <TravelForm dpt={row.dpt} returnDate={row.return}/> : <TravelForm/>} */}
-    </Formik>
-
-    </div>
+ </div>
   );
 };
 
 export const EditBookingPage = () => {
+
   const API_KEY = process.env.REACT_APP_BASEURL;
 
   const [row, setRow] = useState([]);

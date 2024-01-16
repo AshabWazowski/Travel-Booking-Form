@@ -60,8 +60,8 @@ const FlightDetails = ({
                 handleChange={handleChange}
                 handleBlur={handleBlur}
                 label="Departure Date"
-                errors={Boolean(touched.dptDate) && Boolean(errors.dptDate)}
-                helperText={touched.dptDate && errors.dptDate}
+                // errors={Boolean(touched.dptDate) && Boolean(errors.dptDate)}
+                // helperText={touched.dptDate && errors.dptDate}
               />
             </SharedBox>
 
@@ -75,8 +75,8 @@ const FlightDetails = ({
               value={values.dptDate}
               handleChange={handleChange}
               handleBlur={handleBlur}
-              errors={Boolean(touched.dptDate) && Boolean(errors.dptDate)}
-              helperText={touched.dptDate && errors.dptDate} 
+              // errors={Boolean(touched.dptDate) && Boolean(errors.dptDate)}
+              // helperText={touched.dptDate && errors.dptDate} 
               />
             </SharedBox>
           </SharedBox>
