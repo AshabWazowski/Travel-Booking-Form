@@ -1,4 +1,5 @@
-import React, { lazy, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+// import { useMediaQuery } from "@mui/material";
 import {SaveBookingData } from "../API_Handling/ApiHandling";
 import MainForm from "../components/Form/Form";
 import Table from "../components/Table/Table";
@@ -18,6 +19,7 @@ const validationSchema = yup.object().shape({
   // departureDate: yup.date().required("required"),
   // returnDate: yup.date().required("required"),
   peopleCount: yup.number().required("required"),
+  hotelDays: yup.number().required("required"),
 });
 
 
@@ -36,6 +38,8 @@ export const HomePage = () => {
 
 export const BookingHomePage = () => {
   const [submitCheck, setSubmitCheck] = useState('');
+  const desktop = 5
+
   
   const initialValues = {
     bookId: "",
@@ -85,7 +89,15 @@ export const BookingHomePage = () => {
               setFieldValue={setFieldValue}
             />
             
-            <ExpenseForm />
+            <ExpenseForm 
+            values={values}
+            touched={touched}
+            errors={errors}
+            handleBlur={handleBlur}
+            handleChange={handleChange} 
+            />
+
+
             <FormButtons submitCheck={submitCheck} setSubmitCheck={setSubmitCheck}/>
           </form>
         )}
