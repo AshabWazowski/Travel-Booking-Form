@@ -1,11 +1,14 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import {
   SharedBox,
   SharedDatePicker,
   SharedPaper,
+  SharedSelect,
   SharedTextField,
+  SharedTypo,
 } from "../../Assets/SharedAssets";
 import dateformat from 'dateformat'
+import { MenuItem } from "@mui/material";
 
 const FlightDetails = ({
   values,
@@ -15,6 +18,8 @@ const FlightDetails = ({
   handleChange,
   setFieldValue
 }) => {
+
+  const [dpt , setDpt] = useState(null)
 
 
   return (
@@ -56,10 +61,11 @@ const FlightDetails = ({
             <SharedBox flexDirection="column" alignItems="start" gap="0.8rem">
               <label>Departure Date</label>
               <SharedDatePicker
+              format="DD-MM-YYYY"
                 disablePast
                 name="dptDate"
                 value={values.dptDate}
-                handleChange={(value)=>setFieldValue("dptDate", dateformat(value))}
+                handleChange={(value)=>(setFieldValue("dptDate", dateformat(value, "mediumDate")), setDpt(value))}
                 handleBlur={handleBlur}
                 label="Departure Date"
                 renderInput = {{textField:{variant:'filled'}}}
@@ -71,12 +77,13 @@ const FlightDetails = ({
             <SharedBox flexDirection="column" alignItems="start" gap="0.8rem">
               <label>Return Date</label>
               <SharedDatePicker 
+              minDate={dpt}
               disablePast
               disabled={values.radioCheck === "Oneway" ? true : false}
               label="Return Date"               
               name="returnDate"
               value={values.returnDate}
-              handleChange={(value)=>setFieldValue("returnDate", dateformat(value, 'dd-mm-yyyy'))}
+              handleChange={(value)=>setFieldValue("returnDate", dateformat(value, "mediumDate"))}
               handleBlur={handleBlur}
               errors={Boolean(touched.returnDate) && Boolean(errors.returnDate)}
               helperText={touched.returnDate && errors.returnDate} 
@@ -103,7 +110,18 @@ const FlightDetails = ({
 
             <SharedBox flexDirection="column" alignItems="start" gap="0.8rem">
               <label>Select Class</label>
-              <SharedTextField variant="outlined" label="To Airport" />
+              <SharedSelect 
+              width='150px'
+              label='Select Class'
+              value={values.flightClass}
+              name="flightClass"
+              handleChange={handleChange}
+              >
+              <MenuItem value=''><SharedTypo variant='body2'>None</SharedTypo></MenuItem>
+              <MenuItem value='Business'><SharedTypo variant='body2'>Business</SharedTypo></MenuItem>
+              <MenuItem value='first'><SharedTypo variant='body2'>First Class</SharedTypo></MenuItem>
+              <MenuItem value='economy'><SharedTypo variant='body2'>Economy</SharedTypo></MenuItem>
+              </SharedSelect>
             </SharedBox>
           </SharedBox>
         </SharedBox>

@@ -153,13 +153,18 @@ export const SharedSelect = ({
   variant,
   fullWidth,
   label,
+  handleChange,
+  name,
+  disabled
 }) => {
   return (
     <FormControl fullWidth={fullWidth}>
       <InputLabel>{label}</InputLabel>
       <Select
+        disabled = {disabled}
         variant={variant}
-        onChange={handleSelect}
+        name={name}
+        onChange={handleChange}
         value={value}
         sx={{ width: width }}
       >
@@ -180,10 +185,14 @@ export const SharedDatePicker = ({
   disabled,
   disablePast,
   renderInput,
+  format,
+  minDate
 }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
+      minDate={minDate}
+      format={format}
       disablePast={disablePast}
       disabled={disabled}
         name={name}
