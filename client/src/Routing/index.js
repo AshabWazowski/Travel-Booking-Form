@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { lazy, useEffect, useState } from "react";
 import {SaveBookingData } from "../API_Handling/ApiHandling";
 import MainForm from "../components/Form/Form";
 import Table from "../components/Table/Table";
@@ -11,7 +11,6 @@ import axios from "axios";
 
 import { Formik } from "formik";
 import * as yup from "yup";
-import { Button } from "@mui/material";
 
 const validationSchema = yup.object().shape({
   title: yup.string().required("required"),
@@ -55,6 +54,7 @@ export const BookingHomePage = () => {
     radioCheck: "Oneway",
   };
   const handleFormSubmit = (values) => {
+    console.log("VAlues below");
           SaveBookingData(values);
   };
 
@@ -73,6 +73,7 @@ export const BookingHomePage = () => {
           handleSubmit,
           handleBlur,
           handleChange,
+          setFieldValue
         }) => (
           <form onSubmit={handleSubmit}>
             <TravelForm
@@ -81,6 +82,7 @@ export const BookingHomePage = () => {
               errors={errors}
               handleBlur={handleBlur}
               handleChange={handleChange}
+              setFieldValue={setFieldValue}
             />
             
             <ExpenseForm />

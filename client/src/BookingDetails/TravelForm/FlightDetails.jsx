@@ -5,6 +5,7 @@ import {
   SharedPaper,
   SharedTextField,
 } from "../../Assets/SharedAssets";
+import dateformat from 'dateformat'
 
 const FlightDetails = ({
   values,
@@ -12,6 +13,7 @@ const FlightDetails = ({
   touched,
   handleBlur,
   handleChange,
+  setFieldValue
 }) => {
 
 
@@ -57,11 +59,12 @@ const FlightDetails = ({
                 disablePast
                 name="dptDate"
                 value={values.dptDate}
-                handleChange={handleChange}
+                handleChange={(value)=>setFieldValue("dptDate", dateformat(value))}
                 handleBlur={handleBlur}
                 label="Departure Date"
-                // errors={Boolean(touched.dptDate) && Boolean(errors.dptDate)}
-                // helperText={touched.dptDate && errors.dptDate}
+                renderInput = {{textField:{variant:'filled'}}}
+                errors={Boolean(touched.dptDate) && Boolean(errors.dptDate)}
+                helperText={touched.dptDate && errors.dptDate}
               />
             </SharedBox>
 
@@ -71,12 +74,13 @@ const FlightDetails = ({
               disablePast
               disabled={values.radioCheck === "Oneway" ? true : false}
               label="Return Date"               
-              name="dptDate"
-              value={values.dptDate}
-              handleChange={handleChange}
+              name="returnDate"
+              value={values.returnDate}
+              handleChange={(value)=>setFieldValue("returnDate", dateformat(value, 'dd-mm-yyyy'))}
               handleBlur={handleBlur}
-              // errors={Boolean(touched.dptDate) && Boolean(errors.dptDate)}
-              // helperText={touched.dptDate && errors.dptDate} 
+              errors={Boolean(touched.returnDate) && Boolean(errors.returnDate)}
+              helperText={touched.returnDate && errors.returnDate} 
+              renderInput = {{textField:{variant:'filled'}}}
               />
             </SharedBox>
           </SharedBox>

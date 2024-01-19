@@ -179,6 +179,7 @@ export const SharedDatePicker = ({
   name,
   disabled,
   disablePast,
+  renderInput,
 }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -192,6 +193,7 @@ export const SharedDatePicker = ({
         label={label}
         error={error}
         helperText={helperText}
+        slotProps={renderInput}
       />
     </LocalizationProvider>
   );
