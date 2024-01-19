@@ -5,7 +5,7 @@ import FlightDetails from "./FlightDetails";
 import RadioCheck from "./RadioCheck";
 import InfoIcon from "@mui/icons-material/Info";
 
-const TravelForm = ({ values, errors, touched, handleBlur, handleChange }) => {
+const TravelForm = ({setFieldValue, values, errors, touched, handleBlur, handleChange }) => {
  
  
   return (
@@ -45,6 +45,7 @@ const TravelForm = ({ values, errors, touched, handleBlur, handleChange }) => {
         errors={errors}
         handleBlur={handleBlur}
         handleChange={handleChange}
+        setFieldValue={setFieldValue}
       />
     </SharedBox>
   );
