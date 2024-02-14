@@ -77,6 +77,7 @@ const FlightDetails = ({
             <SharedBox flexDirection="column" alignItems="start" gap="0.8rem">
               <label>Return Date</label>
               <SharedDatePicker 
+              format="DD-MM-YYYY"
               minDate={dpt}
               disablePast
               disabled={values.radioCheck === "Oneway" ? true : false}
