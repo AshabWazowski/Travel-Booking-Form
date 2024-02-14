@@ -41,8 +41,6 @@ app.get('/tableData/row/:id', (req, res)=>{
     try{
         const id = req.params.id;
         const userData = rowData.filter((item) => item.label == id);
-
-        console.log(id, userData);
         return res.status(200).json(userData);
     }catch(err){
         console.log(err.message)

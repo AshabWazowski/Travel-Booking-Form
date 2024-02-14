@@ -3,45 +3,43 @@ import mongoose from 'mongoose';
 const BookingSchema = new mongoose.Schema({
  userId:{
     type: String,
- },
- title:{
+    },
+     title:{
     type: String ,
     required:true,
     max: 100,
- },
- radio:{
-    type:String
- },
-fromAirport:{
-    type: String ,
-    required:true,
-},
-toAirport:{
-    type: String ,
-    required:true,
-},
-deptDate:{
-    type:Date ,
-    required:true
-},
-returnDate:String,
-people:{
-    type: Number,
-    required:true
-},
-bookingId:{
-    type: String,
-    unique:true,
-},
-flightClass:String,
-hotel:Boolean,
-hotelDays:Number,
-car:Boolean,
-carType:String,
-carDays:Number,
-status: String,
+    },
+    fromAirport:{
+     type: String ,
+     required:true,
+    },
+    toAirport:{
+        type: String ,
+        required:true,
+    },
+    dptDate:{
+        type:Date ,
+        required:true
+    },
+    returnDate:String,
+    peopleCount:{
+        type: Number,
+        required:true
+    },
+    bookingId:{
+        type: String,
+        unique:true,
+    },
+    radioCheck:String,
+    flightClass:String,
+    hotel:Boolean,
+    hotelDays:Number,
+    car:Boolean,
+    carType:String,
+    carDays:Number,
+    status: String,
 }, 
-{timestamps:true}
+    {timestamps:true}
 );
 
 const booking = mongoose.model('Booking', BookingSchema)

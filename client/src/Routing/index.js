@@ -23,8 +23,6 @@ const validationSchema = yup.object().shape({
 });
 
 
-
-
 export const HomePage = () => {
   return (
     <div>
@@ -35,14 +33,12 @@ export const HomePage = () => {
 };
 
 
-
 export const BookingHomePage = () => {
   const [submitCheck, setSubmitCheck] = useState('');
-  const desktop = 5
 
   
   const initialValues = {
-    bookId: "",
+    userId:"",
     title: "",
     fromAirport: "",
     toAirport: "",
@@ -56,9 +52,9 @@ export const BookingHomePage = () => {
     carType: "",
     carDays: 0,
     radioCheck: "Oneway",
+    status:'',
   };
   const handleFormSubmit = (values) => {
-    console.log("VAlues below");
           SaveBookingData(values);
   };
 
@@ -106,6 +102,9 @@ export const BookingHomePage = () => {
   );
 };
 
+
+
+
 export const EditBookingPage = () => {
 
   const API_KEY = process.env.REACT_APP_BASEURL;
@@ -125,7 +124,6 @@ export const EditBookingPage = () => {
       console.log("Ashab Error is: ", error.message);
     }
   };
-  console.log("Row Data", row);
 
   return <BookingHomePage row={row[0]} />;
 };
