@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import { useMediaQuery } from "@mui/material";
-import {SaveBookingData } from "../API_Handling/ApiHandling";
+import {SaveBookingData, SubmitBookingData } from "../API_Handling/ApiHandling";
 import MainForm from "../components/Form/Form";
 import Table from "../components/Table/Table";
 import Instruction from "../BookingDetails/Instruction/Instruction";
@@ -9,6 +8,7 @@ import ExpenseForm from "../BookingDetails/ExpensesForm/ExpenseForm";
 import FormButtons from "../BookingDetails/FormButtons/FormButtons";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -34,10 +34,12 @@ export const HomePage = () => {
 
 
 export const BookingHomePage = () => {
-  const [submitCheck, setSubmitCheck] = useState('');
+  // const [submitCheck, setSubmitCheck] = useState('');
+  const submitCheck = useSelector((state) => state.authTravel.submitBtn)
 
   
   const initialValues = {
+    bookingId:'',
     userId:"",
     title: "",
     fromAirport: "",
@@ -54,8 +56,11 @@ export const BookingHomePage = () => {
     radioCheck: "Oneway",
     status:'',
   };
-  const handleFormSubmit = (values) => {
-          SaveBookingData(values);
+  const handleFormSubmit = async (values) => {
+    if(submitCheck==="save"){
+      await SaveBookingData(values);
+    }
+    await SubmitBookingData(values)
   };
 
   return (
@@ -94,7 +99,7 @@ export const BookingHomePage = () => {
             />
 
 
-            <FormButtons submitCheck={submitCheck} setSubmitCheck={setSubmitCheck}/>
+            <FormButtons/>
           </form>
         )}
       </Formik>
