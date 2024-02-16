@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {SaveBookingData } from "../API_Handling/ApiHandling";
+import {SaveBookingData, SubmitBookingData } from "../API_Handling/ApiHandling";
 import MainForm from "../components/Form/Form";
 import Table from "../components/Table/Table";
 import Instruction from "../BookingDetails/Instruction/Instruction";
@@ -39,6 +39,7 @@ export const BookingHomePage = () => {
 
   
   const initialValues = {
+    bookingId:'',
     userId:"",
     title: "",
     fromAirport: "",
@@ -55,8 +56,11 @@ export const BookingHomePage = () => {
     radioCheck: "Oneway",
     status:'',
   };
-  const handleFormSubmit = (values) => {
-          SaveBookingData(values);
+  const handleFormSubmit = async (values) => {
+    if(submitCheck==="save"){
+      await SaveBookingData(values);
+    }
+    await SubmitBookingData(values)
   };
 
   return (

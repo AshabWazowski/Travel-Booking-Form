@@ -5,12 +5,16 @@ const initialState = {
 user:null,
 data:[],
 submitBtn: "",
+tempData:[],
 }
 
 export const authSlice = createSlice({
-    name:'travelReducer',
+    name:'auth',
     initialState,
     reducers: {
+        setLogin : (state, action)=>{
+            state.user = action.payload;
+        },
         setData: (state, action) => {
                 state.data = action.payload;
         },
